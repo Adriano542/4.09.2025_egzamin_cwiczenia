@@ -42,5 +42,42 @@
   <footer>
     <p>Autor strony: 123456</p>
   </footer>
+  <script>
+  function obliczRate() {
+    // Ceny kursów zgodne z ilustracją 4
+    const cenaReact = 1200;
+    const cenaJS = 1200;
+
+    // Pobranie stanu pól wyboru
+    const reactWybrany = document.querySelectorAll('input[type="checkbox"]')[0].checked;
+    const jsWybrany = document.querySelectorAll('input[type="checkbox"]')[1].checked;
+
+    // Pobranie liczby rat
+    const liczbaRatInput = document.querySelector('input[type="number"]');
+    const liczbaRat = parseInt(liczbaRatInput.value);
+
+    // Pobranie wybranego miasta
+    const miasto = document.querySelector('select').value;
+
+    // Obliczenie całkowitej kwoty
+    let kwotaCalkowita = 0;
+    if (reactWybrany) kwotaCalkowita += cenaReact;
+    if (jsWybrany) kwotaCalkowita += cenaJS;
+
+    // Obliczenie jednej raty
+    let rata = liczbaRat > 0 ? (kwotaCalkowita / liczbaRat).toFixed(2) : 0;
+
+    // Wyświetlenie wyniku
+    const paragrafWynik = document.getElementById("wynik");
+    if (kwotaCalkowita > 0 && liczbaRat > 0) {
+      paragrafWynik.textContent = `Kurs odbędzie się w ${miasto}. Koszt całkowity: ${kwotaCalkowita} zł. Płacisz ${liczbaRat} rat po ${rata} zł`;
+    } else {
+      paragrafWynik.textContent = "Proszę wybrać kurs i podać poprawną liczbę rat.";
+    }
+  }
+
+  // Przypisanie funkcji do przycisku
+  document.querySelector('button').addEventListener('click', obliczRate);
+</script>
 </body>
 </html>
